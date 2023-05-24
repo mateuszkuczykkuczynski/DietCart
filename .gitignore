@@ -1,7 +1,3 @@
-/.env.dev
-/.env.dev.db
-.idea/
-
 # Django #
 *.log
 *.pot
@@ -16,6 +12,7 @@ media
 # If you are using PyCharm #
 # User-specific stuff
 .idea
+.idea/
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
@@ -142,4 +139,6 @@ GitHub.sublime-settings
 !.vscode/extensions.json
 .history
 
+/.env.dev
+/.env.dev.db
 .DS_Store
