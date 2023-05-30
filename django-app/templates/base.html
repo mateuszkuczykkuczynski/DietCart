@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    {% block ref %}
+    {% endblock %}
+
+</head>
+<body>
+
+{% block content %}
+
+{% endblock %}
+
+
+
+</body>
+</html>

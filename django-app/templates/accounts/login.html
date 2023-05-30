@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block ref %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+    <main class="form-signin">
+        <form method="post">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+            {% for field in form %}
+                {% include "components/field.html" with field=field %}
+            {% endfor %}
+
+            <p>Not a member? <a href="">Register</a></p>
+
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            {% comment %}<p class="mt-5 mb-3 text-muted">&copy; 2023</p>{% endcomment %}
+        </form>
+    </main>
+{% endblock %}
