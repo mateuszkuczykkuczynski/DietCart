@@ -2,24 +2,23 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/accounts/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/accounts/register.css' %}">
 
 {% endblock %}
 
 {% block navbar %}
 {% endblock %}
 
+
 {% block content %}
-    <main class="form-signin">
+    <main class="form-register">
         <form method="post">
             {% csrf_token %}
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <h1 class="h3 mb-3 fw-normal">Sign in</h1>
 
             {% for field in form %}
                 {% include "components/field.html" with field=field %}
             {% endfor %}
-
-            <p>Not a member? <a href={% url 'register' %}>Register</a></p>
 
             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
         </form>

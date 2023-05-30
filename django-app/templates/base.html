@@ -3,18 +3,26 @@
 <head>
     <title>{% block title %}{% endblock %}</title>
 
+    {% load static %}
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
-    {% block ref %}
+    {% block head %}
     {% endblock %}
+
 
 </head>
 <body>
 
-{% block content %}
+{% block navbar %}
+    {% include 'components/navbar.html' %}
+{% endblock %}
 
+
+{% block content %}
+    Default content
 {% endblock %}
 
 
