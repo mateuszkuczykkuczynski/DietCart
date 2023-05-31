@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/accounts/user_update.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+    {% comment %}    <div class="container mt-3">
+        <div class="main-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Settings</h5>
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin"
+                                     class="rounded-circle p-1 bg-primary" width="110">
+                                <div class="mt-3">
+                                    <h4>John Doe</h4>
+                                    <p class="text-secondary mb-1">Full Stack Developer</p>
+                                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                    <button class="btn btn-primary">Follow</button>
+                                    <button class="btn btn-outline-primary">Message</button>
+                                </div>
+                            </div>
+                            <ul>
+                                <li>Profile</li>
+                                <li>Settings 1</li>
+                                <li>Settings 2</li>
+                                <li>Settings 3</li>
+                                <li>Settings 4</li>
+                                <li>Settings 5</li>
+                                <li>Settings 6</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Profile</h5>
+                            <div class="row mb-3">
+                                <main class="form-update">
+                                    <form method="post">
+                                        {% csrf_token %}
+
+                                        {% for field in form %}
+                                            {% include "components/field.html" with field=field %}
+                                        {% endfor %}
+
+                                        <button class="w-100 btn btn-lg btn-primary" type="submit">Update</button>
+                                    </form>
+                                </main>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>{% endcomment %}
+
+
+
+    <div class="container mt-4">
+
+        <div class="row gutters-sm">
+            <div class="col-md-3 d-none d-md-block">
+                <div class="card">
+                    <div class="card-body">
+                        <nav class="nav flex-column nav-pills nav-gap-y-1" id="nav-tab" role="tablist">
+                            {% include "components/nav_tab_button.html" with nav_id="nav-profile" icon_class="bi-person" button_text="Profile" active="active"%}
+                            {% include "components/nav_tab_button.html" with nav_id="nav-account" icon_class="bi-gear" button_text="Account"%}
+                            {% include "components/nav_tab_button.html" with nav_id="nav-security" icon_class="bi-lock" button_text="Security"%}
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body tab-content" id="nav-tabContent">
+                        <div class="tab-pane active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <h6>YOUR PROFILE INFORMATION</h6>
+                            <hr>
+                            <form>
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" class="form-control" id="fullName"
+                                           aria-describedby="fullNameHelp" placeholder="Enter your fullname"
+                                           value="Kenneth Valdez">
+                                    <small id="fullNameHelp" class="form-text text-muted">Your name may appear around
+                                        here where you are mentioned. You can change or remove it at any time.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bio">Your Bio</label>
+                                    <textarea class="form-control autosize" id="bio"
+                                              placeholder="Write something about you"
+                                              style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;">A front-end developer that focus more on user interface design, a web interface wizard, a connector of awesomeness.</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="url">URL</label>
+                                    <input type="text" class="form-control" id="url"
+                                           placeholder="Enter your website address" value="http://benije.ke/pozzivkij">
+                                </div>
+                                <div class="form-group">
+                                    <label for="location">Location</label>
+                                    <input type="text" class="form-control" id="location"
+                                           placeholder="Enter your location" value="Bay Area, San Francisco, CA">
+                                </div>
+                                <div class="form-group small text-muted">
+                                    All of the fields on this page are optional and can be deleted at any time, and by
+                                    filling them out, you're giving us consent to share this data wherever your user
+                                    profile appears.
+                                </div>
+                                <button type="button" class="btn btn-primary">Update Profile</button>
+                                <button type="reset" class="btn btn-light">Reset Changes</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="nav-account" role="tabpanel" aria-labelledby="nav-account-tab">
+                            <h6>ACCOUNT SETTINGS</h6>
+                            <hr>
+                            <form>
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username"
+                                           aria-describedby="usernameHelp" placeholder="Enter your username"
+                                           value="kennethvaldez">
+                                    <small id="usernameHelp" class="form-text text-muted">After changing your username,
+                                        your old username becomes available for anyone else to claim.</small>
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <label class="d-block text-danger">Delete Account</label>
+                                    <p class="text-muted font-size-sm">Once you delete your account, there is no going
+                                        back. Please be certain.</p>
+                                </div>
+                                <button class="btn btn-danger" type="button">Delete Account</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="nav-security" role="tabpanel" aria-labelledby="nav-security-tab">
+                            <h6>SECURITY SETTINGS</h6>
+                            <hr>
+                            <form>
+                                <div class="form-group">
+                                    <label class="d-block">Change Password</label>
+                                    <input type="text" class="form-control" placeholder="Enter your old password">
+                                    <input type="text" class="form-control mt-1" placeholder="New password">
+                                    <input type="text" class="form-control mt-1" placeholder="Confirm new password">
+                                </div>
+                            </form>
+                            <hr>
+                            <form>
+                                <div class="form-group">
+                                    <label class="d-block">Two Factor Authentication</label>
+                                    <button class="btn btn-info" type="button">Enable two-factor authentication</button>
+                                    <p class="small text-muted mt-2">Two-factor authentication adds an additional layer
+                                        of security to your account by requiring more than just a password to log
+                                        in.</p>
+                                </div>
+                            </form>
+                            <hr>
+                            <form>
+                                <div class="form-group mb-0">
+                                    <label class="d-block">Sessions</label>
+                                    <p class="font-size-sm text-secondary">This is a list of devices that have logged
+                                        into your account. Revoke any sessions that you do not recognize.</p>
+                                    <ul class="list-group list-group-sm">
+                                        <li class="list-group-item has-icon">
+                                            <div>
+                                                <h6 class="mb-0">San Francisco City 190.24.335.55</h6>
+                                                <small class="text-muted">Your current session seen in United
+                                                    States</small>
+                                            </div>
+                                            <button class="btn btn-light btn-sm ml-auto" type="button">More info
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}
