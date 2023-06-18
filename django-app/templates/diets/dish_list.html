@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Dish List</h1>
+    <a href="{% url 'dish_create' %}">Create new dish</a>
+    <ul>
+    {% for dish in object_list  %}
+        <li><a href="{% url 'dish_edit' dish.pk %}">{{ dish.name }}</a></li>
+    {% empty %}
+        <li>No dishes available.</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

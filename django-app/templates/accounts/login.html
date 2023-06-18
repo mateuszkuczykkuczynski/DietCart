@@ -15,8 +15,14 @@
             {% csrf_token %}
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
+            {% for error in form.errors.values %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+
             {% for field in form %}
-                {% include "components/field.html" with field=field %}
+                {% include "components/field.html" with field=field form_class="form-floating" %}
             {% endfor %}
 
             <p>Not a member? <a href={% url 'register' %}>Register</a></p>
@@ -24,4 +30,6 @@
             <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
         </form>
     </main>
+
+
 {% endblock %}

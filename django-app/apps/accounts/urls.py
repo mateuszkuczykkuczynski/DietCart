@@ -8,3 +8,6 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('user_update/<int:pk>/', UserUpdateView.as_view(), name='user_update'),
     ]
+
+
+

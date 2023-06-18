@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.fset').formset({
+                prefix: '{{ formset.prefix }}',
+                deleteCssClass: 'btn btn-danger mt-23',
+                deleteText: '<i class="bi bi-trash"></i>',
+                hideLastAddForm: true,
+                addText: '+',
+                addCssClass: 'btn btn-success'
+
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="{% static 'css/diets/dish_edit.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    {% include "components/product_modal.html" %}
+
+    <form method="post">
+        {% csrf_token %}
+        <h3 class="h3 mb-3 fw-normal">Dish</h3>
+        {% for field in form %}
+            {% include "components/field.html" with field=field form_class="form-group" %}
+        {% endfor %}
+
+        {{ formset.management_form }}
+        <h3 class="h3 mb-3 fw-normal">Ingredients</h3>
+        {% for fset in formset %}
+            {% for error in fset.errors.items %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error.0 }} {{ error.1 }}
+                </div>
+            {% endfor %}
+
+            <div class="fset row align-items-start">
+                <div class="col">
+                    {{ fset.product }}
+                </div>
+                <div class="col-2">
+                    {% include "components/field.html" with field=fset.grammage form_class="form-group" %}
+                </div>
+                {{ fset.id }}
+                {% if fset.instance.pk %}
+                    {{ fset.DELETE }}
+                    {{ fset.ORDER }}
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button class="btn btn-primary float-end" type="submit">Save</button>
+    </form>
+{% endblock %}
+

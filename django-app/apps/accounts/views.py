@@ -10,7 +10,7 @@ from .models import CustomUser
 class RegisterView(generic.FormView):
     form_class = RegisterForm
     template_name = 'accounts/register.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('login')  # TODO Stworzyć monit o poprawnym stworzeniu użytkownika
 
     def form_valid(self, form):
         form.save()

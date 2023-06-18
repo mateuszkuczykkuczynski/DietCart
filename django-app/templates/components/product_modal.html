@@ -1,0 +1,66 @@
+<div class="modal fade" id="productModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="productModal"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Find product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="modal-hidden-input">
+                <form id="modal-search-form">
+                    <label for="modal-search-input">Type product name or company</label>
+                    <div class="input-group">
+                        <input pattern=".{3,}" type="text" id="modal-search-input" class="form-control" required
+                               placeholder="Type at least 3 characters">
+                        <button class="btn btn-primary" id="modal-search-button" type="button">Search
+                        </button>
+                    </div>
+                </form>
+                <div id="modal-search-list" class="list-group mt-2">
+
+                </div>
+                <a href="{% url 'product_create' %}" class="mt-2" target="_blank">Can"t see a product you want? Add one</a>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Choose</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const modalInputId = $('#modal-hidden-input');
+    const modalSearchButton = $('#modal-search-button');
+    const modalSearchList = $('#modal-search-list');
+    const modal = $('#productModal');
+
+
+    modal.on('hide.bs.modal', function () {
+        modalInputId.val(null);
+    });
+
+    modalSearchButton.on('click', function () {
+
+        if (!$('#modal-search-form')[0].checkValidity()) {
+            $('#modal-search-form')[0].reportValidity()
+        } else {
+            $.get({
+                url: "{% url 'product-list' %}?q=" + $("#modal-search-input").val(), success: function (result) {
+                    let html = "";
+                    result.forEach(element => {
+                        let text = '<a href="#" class="list-group-item list-group-item-action">' + element.name + ' ' + element.brand + '</a>';
+                        html += text
+                    });
+                    modalSearchList.html(html);
+                    $('.list-group-item, .list-group-item-action').on('click', function (event) {
+                        $(".active, .list-group-item").removeClass("active");
+                        event.target.classList.add("active");
+                    })
+                }
+            });
+        }
+    })
+</script>

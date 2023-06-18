@@ -1,34 +1,29 @@
-<style type="text/css" scoped>
-    .last-item {
-        margin-left: auto;
-        color: #fff;
-    }
-
-</style>
-
-
 <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-    <div class="container-fluid">
+    <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">DietCart</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse navbar-nav" id="navbarNavDropdown">
-            <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
-            <a class="nav-link" href="#">Pricing</a>
+
             {% if user.is_authenticated %}
-                <li class="nav-item dropstart last-item ">
+                <a class="nav-link" href="#">Diets</a>
+                <a class="nav-link" href="{% url 'dish_list' %}">Meals</a>
+                <a class="nav-link" href="{% url 'product_list' %}">Products</a>
+
+                <li class="nav-item dropdown ms-lg-auto">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         Settings
                     </a>
-                    <ul class="dropdown-menu ">
+                    <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="{% url 'user_update' user.pk %}">Profile</a></li>
                         <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
                     </ul>
                 </li>
             {% else %}
+                <a class="nav-link" href="#">Pricing</a>
                 <a class="nav-link last-item" href="{% url 'login' %}">Log in</a>
             {% endif %}
         </div>

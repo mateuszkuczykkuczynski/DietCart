@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Dish List</h1>
+    <a href="{% url 'product_create' %}">Create new product</a>
+    <ul>
+    {% for product in object_list  %}
+        <li><a href="{% url 'product_edit' product.pk %}">{{ product.name }}</a></li>
+    {% empty %}
+        <li>No products available.</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

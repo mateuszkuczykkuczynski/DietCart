@@ -1,0 +1,18 @@
+<input type="hidden" name="{{ widget.name }}" id="id_{{ widget.name }}" value="{{ widget.value }}"
+       placeholder="Product">
+
+<label for="text_{{ widget.name }}">Product</label>
+<div class="input-group">
+    <input class="form-control" type="text" id="text_{{ widget.name }}" value="{{ widget.product_name }}" disabled>
+    <button class="btn btn-primary" id="button_{{ widget.name }}" type="button" data-bs-toggle="modal"
+            data-bs-target="#productModal"><i class="bi bi-search"></i>
+    </button>
+</div>
+
+{% comment %} #TODO fix dodawania kolejnych formsów
+{% endcomment %}
+<script>
+    $('#button_{{ widget.name }}').on('click', function(){
+        $('#modal-hidden-input').val('{{ widget.name }}');
+    });
+</script>

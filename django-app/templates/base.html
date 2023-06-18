@@ -9,6 +9,10 @@
     {% bootstrap_javascript %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'icons/font/bootstrap-icons.css' %}">
+    <script
+            src="https://code.jquery.com/jquery-3.7.0.js"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+            crossorigin="anonymous"></script>
 
     {% block head %}
     {% endblock %}
@@ -21,12 +25,11 @@
     {% include 'components/navbar.html' %}
 {% endblock %}
 
-
-{% block content %}
-    Default content
-{% endblock %}
-
-
+<div class="container">
+    {% block content %}
+        Default content
+    {% endblock %}
+</div>
 
 </body>
 </html>

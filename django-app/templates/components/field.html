@@ -1,13 +1,19 @@
 {% load widget_tweaks %}
 
 {% if field.errors %}
-    <div class="alert alert-danger" role="alert">
+{% comment %}    <div class="alert alert-danger" role="alert">
         {{ field.errors }}
-    </div>
+    </div>{% endcomment %}
 {% endif %}
 
-<div class="form-floating mb-3">
+<div class="{{ form_class }} mb-3">
+    {% if form_class == "form-group" %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {% endif %}
 
     {% render_field field type=field.field.widget.input_type placeholder=field.label class+="form-control" %}
-    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+    {% if form_class == "form-floating" %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {% endif %}
 </div>

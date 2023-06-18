@@ -11,10 +11,10 @@
 
 
 {% block content %}
-    <main class="form-register">
+    {% comment %}    <main class="form-register">
         <form method="post">
             {% csrf_token %}
-            <h1 class="h3 mb-3 fw-normal">Sign in</h1>
+            <h1 class="h3 mb-3 fw-normal"></h1>
 
             {% for field in form %}
                 {% include "components/field.html" with field=field %}
@@ -22,5 +22,36 @@
 
             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
         </form>
-    </main>
+    </main>{% endcomment %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body tab-content" id="nav-tabContent">
+                        <div class="tab-pane active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <h6>SIGN IN</h6>
+                            <hr>
+                            {% for error in form.errors.values %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                            <form method="post">
+                                {% csrf_token %}
+                                {% for field in form %}
+                                    {% include "components/field.html" with field=field form_class="form-group" %}
+                                {% endfor %}
+{% comment %}{{ form }}{% endcomment %}
+                                <button class=" btn btn-primary" type="submit" style="margin-left:40%;width: 20%">Sign
+                                    in
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
