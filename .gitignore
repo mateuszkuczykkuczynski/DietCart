@@ -16,5 +16,4 @@ media
 /.env.dev.db
 
 # Node modules
-/react/dietcart/node_modules
-/react/dietcart/node_modules/*
+# /react/dietcart/node_modules
