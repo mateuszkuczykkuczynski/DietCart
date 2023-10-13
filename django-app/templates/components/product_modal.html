@@ -20,12 +20,12 @@
                 <div id="modal-search-list" class="list-group mt-2">
 
                 </div>
-                <a href="{% url 'product_create' %}" class="mt-2" target="_blank">Can"t see a product you want? Add one</a>
+                <a href="{% url 'product_create' %}" class="mt-2" target="_blank">Can"t see a product you want? Add
+                    one</a>
             </div>
             <div class="modal-footer">
-
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Choose</button>
+                <button type="button" class="btn btn-success" id="modal-choose-button">Choose</button>
             </div>
         </div>
     </div>
@@ -36,29 +36,54 @@
     const modalSearchButton = $('#modal-search-button');
     const modalSearchList = $('#modal-search-list');
     const modal = $('#productModal');
+    const modalForm = $('#modal-search-form');
+    const modalChoosebutton = $('#modal-choose-button');
 
+    modalChoosebutton.on('click', function () {
+        let active = $('.list-group-item.list-group-item-action.active')
+        console.log(active.children())
+        let id = active.children()[0].value
+        let name = active.children()[1].value
+        console.log(id)
+        console.log(name)
+        let form = modalInputId.val()
+        console.log(form)
+        $('#text_'+ form).val(name)
+        $('#id_'+form).val(id)
+        modal.modal('hide');
+    });
 
     modal.on('hide.bs.modal', function () {
         modalInputId.val(null);
     });
 
+    modalForm.submit(function () {
+        return false;
+    });
+
+
     modalSearchButton.on('click', function () {
 
-        if (!$('#modal-search-form')[0].checkValidity()) {
-            $('#modal-search-form')[0].reportValidity()
+        if (!modalForm[0].checkValidity()) {
+            modalForm[0].reportValidity()
         } else {
             $.get({
                 url: "{% url 'product-list' %}?q=" + $("#modal-search-input").val(), success: function (result) {
                     let html = "";
-                    result.forEach(element => {
-                        let text = '<a href="#" class="list-group-item list-group-item-action">' + element.name + ' ' + element.brand + '</a>';
-                        html += text
-                    });
-                    modalSearchList.html(html);
-                    $('.list-group-item, .list-group-item-action').on('click', function (event) {
-                        $(".active, .list-group-item").removeClass("active");
-                        event.target.classList.add("active");
-                    })
+                    if (result.length !== 0) {
+                        result.forEach(element => {
+                            let text = '<a href="#" class="list-group-item list-group-item-action">' + element.name + ' ' + element.brand + '<input type="hidden" value="' + element.id+ '" /> <input type="hidden" value="' + element.name + '" /></a>';
+                            html += text
+                        });
+                        modalSearchList.html(html);
+                        $('.list-group-item.list-group-item-action').on('click', function (event) {
+                            $(".active.list-group-item").removeClass("active");
+                            event.target.classList.add("active");
+                        })
+                    } else {
+                        html = "<p>No product found</p>";
+                        modalSearchList.html(html);
+                    }
                 }
             });
         }

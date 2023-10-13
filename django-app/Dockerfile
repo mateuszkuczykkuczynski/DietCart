@@ -23,9 +23,3 @@ ENV PYTHONUNBUFFERED 1
 
 # copy project
 COPY .. .
-
-# copy entrypoint.sh
-COPY ./entrypoint.sh .
-
-# run entrypoint.sh
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
